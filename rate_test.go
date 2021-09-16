@@ -1,14 +1,14 @@
-package main
+package mymain
 
-import(
-    "io"
-    "testing"
+import (
+    "fmt"
+    "github.com/stretchr/testify/assert"
     "golang.org/x/time/rate"
+    "io"
     "net/http"
     "net/http/httptest"
-    "github.com/stretchr/testify/assert"
     "sync"
-    "fmt"
+    "testing"
     "time"
 )
 
@@ -62,8 +62,8 @@ func TestUsingLimiterScale(t *testing.T){
     }))
     defer ts.Close()
 
-    ServerURL := ts.URL
-    httpClient := http.Client{}
+    //ServerURL := ts.URL
+    //httpClient := http.Client{}
 
     var wait sync.WaitGroup
     wait.Add(testSize)
@@ -77,10 +77,13 @@ func TestUsingLimiterScale(t *testing.T){
         go func(){
             defer wait.Done()
             resultBool := Limiter.Allow()
-            body, err := httpClient.Get(ServerURL)
-            body.Body.Close()
+            /*body, err := httpClient.Get(ServerURL)
+            if err != nil{
+                fmt.Println(err)
+            }
+            body.Body.Close()*/
             as.Equal(true, resultBool)
-            as.Equal(nil, err)
+            //as.Equal(nil, err)
         }()
     }
 

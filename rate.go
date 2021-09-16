@@ -1,4 +1,4 @@
-package main
+package mymain
 
 import (
     "bytes"
@@ -38,7 +38,7 @@ func (r *reader) Read(buf []byte) (int, error) {
     return n, err
 }
 
-func main() {
+func mymain() {
     // Source holding 1MB
     counter := 0
     timeslot := 0
