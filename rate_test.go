@@ -62,8 +62,8 @@ func TestUsingLimiterScale(t *testing.T){
     }))
     defer ts.Close()
 
-    //ServerURL := ts.URL
-    //httpClient := http.Client{}
+    ServerURL := ts.URL
+    httpClient := http.Client{}
 
     var wait sync.WaitGroup
     wait.Add(testSize)
@@ -77,11 +77,11 @@ func TestUsingLimiterScale(t *testing.T){
         go func(){
             defer wait.Done()
             resultBool := Limiter.Allow()
-            /*body, err := httpClient.Get(ServerURL)
+            body, err := httpClient.Get(ServerURL)
             if err != nil{
                 fmt.Println(err)
             }
-            body.Body.Close()*/
+            body.Body.Close()
             as.Equal(true, resultBool)
             //as.Equal(nil, err)
         }()
